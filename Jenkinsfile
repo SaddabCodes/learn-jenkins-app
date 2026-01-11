@@ -10,7 +10,7 @@ pipeline {
         }
       }
       steps {
-        cleanWs()
+        // cleanWs()
         sh '''
           echo "Node version:"
           node --version

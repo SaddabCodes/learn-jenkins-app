@@ -1,22 +1,31 @@
-pipeline{
+pipeline {
   agent any
 
-  stages{
-    stage('build'){
-      agent{
-        docker{
+  stages {
+    stage('Build') {
+      agent {
+        docker {
           image 'node:20-alpine'
           reuseNode true
         }
       }
-      steps{
+      steps {
+        cleanWs()
         sh '''
-        ls -la
-        node --version
-        npm --version
-        npm ci
-        npm run build
-        ls -la
+          echo "Node version:"
+          node --version
+
+          echo "NPM version:"
+          npm --version
+
+          echo "Installing dependencies..."
+          npm ci
+
+          echo "Building app..."
+          CI=true npm run build
+
+          echo "Build completed"
+          ls -la
         '''
       }
     }

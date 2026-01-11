@@ -6,7 +6,7 @@ pipeline{
       agent{
         docker{
           image 'node:lts-alpine3.23'
-          reUseNode true
+          reuseNode true
         }
       }
       steps{
